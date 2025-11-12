@@ -32,8 +32,8 @@
         {
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "resizeMode": "cover",
+           "backgroundColor": "#2c2c2c",
           "dark": {
             "backgroundColor": "#000000"
           }
@@ -43,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "39d4c34c-c3da-4e05-89b8-6e1cded7424e"
+      }
+    },
+    "owner": "welton89"
   }
 }
