@@ -35,7 +35,7 @@ const FeedComponent: React.FC = () => {
             headerTintColor:'#ffff',
             headerTransparent:true,
             headerStyle: {
-              backgroundColor: 'rgba(38, 38, 38, 0)'
+              backgroundColor: 'rgba(200, 0, 0, 0)'
             },
             headerRight: () => (
               <IconButton 
@@ -49,10 +49,10 @@ const FeedComponent: React.FC = () => {
           <View style={StyleSheet.absoluteFill}>
             <Image
               source={{uri:canal?.img || imgAlter}} 
-              style={{flex: 1, width: null,  height: '100%', opacity: 0.3}}
+              style={{flex: 1, width: null,  height: '100%', opacity: 1}}
               resizeMode="cover" 
             />
-            {/* <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(226, 12, 12, 0.2)'}} /> */}
+            <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(35, 35, 35, 0.72)'}} />
           </View>
         ),
 

@@ -110,10 +110,9 @@ const ArticleDetailScreen: React.FC = () => {
             headerRight: () => ( 
             
         <IconButton icon={'bookmark'} 
-        iconColor={isMarkedInStore? '#2e5ffdff' : '#ffff'}
-        
-        size={30}
-        onPressOut={handleMark}
+          iconColor={isMarkedInStore? '#2e5ffdff' : '#ffff'}
+          size={30}
+          onPressOut={handleMark}
         />
        
       ),
