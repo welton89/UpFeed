@@ -37,7 +37,7 @@ const processHtmlForYouTubeEmbeds = (html: string): string => {
     if (!newSrc.includes('rel='))         newSrc = addParam(newSrc, 'rel=0');
     if (!newSrc.includes('controls='))    newSrc = addParam(newSrc, 'controls=1');
     if (!newSrc.includes('enablejsapi=')) newSrc = addParam(newSrc, 'enablejsapi=1');
-    if (!newSrc.includes('origin='))      newSrc = addParam(newSrc, `origin=${encodeURIComponent(window.location.origin)}`);
+    // if (!newSrc.includes('origin='))      newSrc = addParam(newSrc, `origin=${encodeURIComponent(window.location.origin)}`);
 
     return `<iframe src="${newSrc}" ${allowedAttributes} referrerpolicy="strict-origin-when-cross-origin" style="width:100%;aspect-ratio:16/9;border:0;"></iframe>`;
   };
