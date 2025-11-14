@@ -2,6 +2,8 @@ import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { Button as ButtonP, Dialog, Portal, List, IconButton } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useChanneStore } from '../../store/useChanneStore'; 
 import { Category } from '@/types/types'; // Certifique-se que o tipo Category é importável
@@ -114,8 +116,17 @@ const AddChannelScreen: React.FC = () => {
         );
         setLoading(false);
         if (novoCanal) {
-          Alert.alert('Sucesso', `Canal "${novoCanal.name}" Alterado!`);
-          router.back(); 
+          
+          Toast.show({
+            type: 'success',
+            text1: 'Tudo Certo 😁👍',
+            text2: `Canal "${novoCanal.name}" Alterado!`,
+          });
+          setTimeout(function() {
+            router.back(); 
+            
+          }, 1000)
+
         } else {
           Alert.alert('Erro', 'Falha ao alterar o canal.');
         }
@@ -136,7 +147,11 @@ const AddChannelScreen: React.FC = () => {
         );
         setLoading(false);
         if (novoCanal) {
-          Alert.alert('Sucesso', `Canal "${novoCanal.name}" adicionado com sucesso!`);
+            Toast.show({
+            type: 'success',
+            text1: 'Tudo Certo 😁👍',
+            text2: `Canal "${novoCanal.name}" adicionado com sucesso!`,
+          });
           router.back(); 
         } else {
           Alert.alert('Erro', 'Falha ao incluir o canal.');

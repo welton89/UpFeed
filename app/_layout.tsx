@@ -5,9 +5,13 @@ import { useFeedStore } from '@/store/useFeedStore';
 import { useSettingsStore } from '@/store/useSettingsStore';
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
+import Toast, { BaseToast, BaseToastProps } from 'react-native-toast-message';
+
 import { PaperProvider } from 'react-native-paper';
-import 'react-native-reanimated';
+// import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import {toastConfig} from '@/themes/configToast'
 
 
 export default function RootLayout() {
@@ -33,6 +37,7 @@ useEffect(() => {
     }, [isDBLoaded,  loadCategory, loadConfig]);
 
   return (
+    <>
     <SafeAreaProvider>
 
      <PaperProvider>
@@ -43,5 +48,7 @@ useEffect(() => {
       {/* <StatusBar style="auto" /> */}
      </PaperProvider>
     </SafeAreaProvider>
+     <Toast config={toastConfig} />
+    </>
   );
 }
