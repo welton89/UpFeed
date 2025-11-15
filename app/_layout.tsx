@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import Toast, { BaseToast, BaseToastProps } from 'react-native-toast-message';
 
 import { PaperProvider } from 'react-native-paper';
-// import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {toastConfig} from '@/themes/configToast'
@@ -26,10 +25,8 @@ useEffect(() => {
         loadChannel(); 
     }, [loadChannel]);
 
-    // 🚨 SEGUNDO useEffect para coordenar as outras chamadas.
     useEffect(() => {
         if (isDBLoaded) {
-            // Agora que o DB está aberto (isDBLoaded = true), é seguro carregar as outras Stores
             loadFeed();
             loadCategory();
             loadConfig();

@@ -1,9 +1,10 @@
 import { Drawer } from 'expo-router/drawer';
 import React from 'react';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 import CustomDrawerContent from '@/components/CustomDrawer';
-import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Icon } from 'react-native-paper';
+import {COLORS} from '../../themes/colors'
+
 
 
 export default function DrawerLayout() {
@@ -64,7 +65,7 @@ export default function DrawerLayout() {
           title: 'Configurações',
           headerTitleStyle:{color:'red'},
            drawerItemStyle:styles.hidden,
-          drawerIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          // drawerIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
 
@@ -85,13 +86,10 @@ export default function DrawerLayout() {
 }
 
 
-
-
 const styles = StyleSheet.create({
     drawer: {
-        backgroundColor: '#282c34',
+        backgroundColor: COLORS.background,
         paddingTop:30,
-        // position:'relative'
     },
     list: {
         padding: 10,
@@ -116,9 +114,9 @@ const styles = StyleSheet.create({
     itemContainer: {
         padding: 15,
         borderBottomWidth: 1,
-        borderBottomColor: '#eee',
+        borderBottomColor: COLORS.text,
         marginBottom: 10,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.text,
         borderRadius: 8,
         elevation: 3, // Sombra para Android
         shadowColor: '#000', // Sombra para iOS
@@ -126,11 +124,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3,
     },
-    title: {
-      fontWeight: 'bold',
-      marginBottom: 8,
-      color: '#2c3e50',
-    },
+
     hidden: {
       display: 'none',
       fontSize: 26,

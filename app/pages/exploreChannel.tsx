@@ -8,19 +8,8 @@ import { IconButton } from 'react-native-paper';
 import { router, useNavigation } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useChanneStore } from '../../store/useChanneStore';
+import {COLORS} from '../../themes/colors'
 
-
-// --- Definição das Cores do Tema (Dark Gray Moderno) ---
-const COLORS = {
-    background: '#282c34', // Fundo Dark Gray (menos escuro que o #121212)
-    surface: '#3c4048',   // Superfícies (inputs, containers)
-    text: '#F8F8F8',      // Texto principal claro
-    textSecondary: '#B0B0B0', // Texto secundário/label
-    primary: '#61AFEF',   // Cor de destaque (Primary - Azul Ciano moderno)
-    secondary: '#98C379', // Cor secundária para Cancelar (Verde sutil)
-    error: '#E06C75',     // Cor de erro (Vermelho)
-    border: '#4A4F59',    // Borda sutil
-};
 
 const imgAlter:string = 'https://reporterbrasil.org.br/wp-content/uploads/2014/02/RSS.png';
 

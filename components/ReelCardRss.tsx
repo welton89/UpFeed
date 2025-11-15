@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
-import { ItemRSS } from '@/types/types';
 import { router } from 'expo-router';
 import { BlurView } from 'expo-blur';
 import { IconButton } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
+
+import { ItemRSS } from '@/types/types';
 import { useFeedStore } from '@/store/useFeedStore';
 
 
@@ -20,13 +22,12 @@ export const ReelCardRss: React.FC<ReelCardRssProps> = React.memo(({ item, cardH
      const isMarkedInStore = useFeedStore(
         React.useCallback(
             (state) => state.feedList.some(itemMark => itemMark.id === item.id),
-            [item.id] // 👈 Depende APENAS do ID deste cartão
+            [item.id] 
         )
     );
   
       const isMark = isMarkedInStore; 
     const imageUrl = item.img || item.canal.img || imgAlter
-    // const imageUrl = item.img || item.canal.img || 'https://static.vecteezy.com/ti/vetor-gratis/p1/8605368-rss-feed-icon-isolated-on-black-bakcround-symbol-logo-illustration-for-mobile-concept-and-web-design-vector-illustration-vetor.jpg'; 
     const dataFormatada = item.dataPublicacao 
         ? new Date(item.dataPublicacao).toLocaleDateString('pt-BR') + 
         ' às ' + 
@@ -64,7 +65,11 @@ export const ReelCardRss: React.FC<ReelCardRssProps> = React.memo(({ item, cardH
         const handleMark = async () => {
             if (isMark){
               await  feedsMarkedDel(item.id)
-              Alert.alert('Removel salvo')
+                Toast.show({
+                  type: 'info',
+                  text1: 'Tudo Certo',
+                  text2: `Artigo do ${item.canal.name} removido.`,
+                });
 
             }else{
                 const newMark:ItemRSS = {
@@ -72,7 +77,11 @@ export const ReelCardRss: React.FC<ReelCardRssProps> = React.memo(({ item, cardH
                     mark: true,
                 }
                 await feedsMarked(newMark)
-                Alert.alert('Adicionou salvou')
+                  Toast.show({
+                    type: 'success',
+                    text1: 'Tudo Certo 😁👍',
+                    text2: `Artigo do ${item.canal.name} salvo.`,
+                  });
             }
         }
 
@@ -88,8 +97,6 @@ export const ReelCardRss: React.FC<ReelCardRssProps> = React.memo(({ item, cardH
         />
       )}
 
-
-
        <TouchableOpacity 
               onPress={() => handlePressItem(item)}
               disabled={!canNavigate} 
@@ -101,16 +108,12 @@ export const ReelCardRss: React.FC<ReelCardRssProps> = React.memo(({ item, cardH
           tint="dark" style={styles.textOverlay}>
 
 
-
       <View style={{flexDirection:'row',alignItems:'center',gap:15}} >
-
-    
        <TouchableOpacity  style={{flexDirection:'row',alignItems:'center',gap:15}}
               onPress={() => router.push({ pathname: `/(drawer)/channel/[id]`,params: { id: item.canal.id } })}
               disabled={!canNavigate} 
               activeOpacity={0.7} 
             >
-
         <Image
           source={{ uri: item.canal.img || 'https://reporterbrasil.org.br/wp-content/uploads/2014/02/RSS.png' }}
           style={{width:50,height:50,borderRadius:25}}
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   image: {
-    ...StyleSheet.absoluteFillObject, // Preenche todo o container
+    ...StyleSheet.absoluteFillObject, 
   },
   textOverlay: {
     padding: 30,
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
   channelName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#FFD700', // Destaque para o canal
+    color: '#FFD700', 
     marginBottom: 4,
   },
   title: {

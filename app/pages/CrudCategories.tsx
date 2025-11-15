@@ -5,20 +5,7 @@ import { Button, Dialog, Portal, TextInput, List, IconButton, Text, useTheme } f
 import { useCategoryStore } from '@/store/useCategoryStore'; 
 import { Category } from '@/services/dbService'; 
 import { useNavigation } from 'expo-router';
-
-
-// --- Definição das Cores do Tema (Dark Gray Moderno) ---
-const COLORS = {
-    background: '#282c34', // Fundo Dark Gray
-    surface: '#3c4048',   // Superfícies (inputs, containers)
-    text: '#F8F8F8',      // Texto principal claro
-    textSecondary: '#B0B0B0', // Texto secundário/label
-    primary: '#61AFEF',   // Cor de destaque (Primary - Azul Ciano moderno)
-    secondary: '#98C379', // Cor secundária
-    error: '#E06C75',     // Cor de erro (Vermelho)
-    border: '#4A4F59',    // Borda sutil
-    listHover: '#4A4F59', // Cor ao selecionar item na lista
-};
+import {COLORS} from '../../themes/colors'
 
 
 // --- Componente da Tela ---

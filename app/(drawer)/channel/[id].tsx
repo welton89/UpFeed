@@ -9,6 +9,7 @@ import { useChanneStore } from '@/store/useChanneStore';
 import { useFeedStore } from '@/store/useFeedStore';
 import { Channel, ItemRSS } from '@/types/types';
 import useRssFeed from '../../hooks/useRssFeed';
+import {COLORS} from '../../../themes/colors'
 
 
 
@@ -27,12 +28,13 @@ const FeedComponent: React.FC = () => {
     setRefreshTrigger(prev => prev + 1);
   }, [feedItems]);
 
-  
+  // const renderItem = (item:ItemRSS) => { return <CardRss item={item} cardHeight={280}/>}
+
   useLayoutEffect(() => {
     if (id ) {
           navigation.setOptions({
             headerTitle: ` ${canal?.name || (feedsList.length +' Feeds Salvos')}`,
-            headerTintColor:'#ffff',
+            headerTintColor:COLORS.text,
             headerTransparent:true,
             headerStyle: {
               backgroundColor: 'rgba(200, 0, 0, 0)'
@@ -68,7 +70,7 @@ const FeedComponent: React.FC = () => {
     return (
       <View style={[styles.center,styles.container]}>
         <ActivityIndicator size="large" color="#3498db" />
-        <Text style={{ color: '#d8d8d8ff'}}>Carregando feed...</Text>
+        <Text style={{ color: COLORS.text}}>Carregando feed...</Text>
       </View>
     );
   }
@@ -76,7 +78,7 @@ const FeedComponent: React.FC = () => {
   if (error) {
     return (
       <View style={[styles.center,styles.container]}>
-        <Text style={{ color: 'red', fontWeight: 'bold', textAlign: 'center', }}
+        <Text style={{ color: COLORS.error, fontWeight: 'bold', textAlign: 'center', }}
         >Erro ao carregar o feed: {error}</Text>
       </View>
     );
@@ -87,6 +89,7 @@ const FeedComponent: React.FC = () => {
       <FlatList
         data={feedItems}
         keyExtractor={(item) => item.titulo}
+        // renderItem={renderItem}
         renderItem={({ item }) =>  <CardRss item={item} cardHeight={280}/>}//{renderItem}
         />
     </View>
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop:100,
-        backgroundColor: '#282c34',
+        backgroundColor: COLORS.background,
     },
 
     center: {

@@ -1,13 +1,11 @@
 import { useState, useMemo, useCallback, useLayoutEffect } from 'react';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { Alert } from 'react-native';
 import { useFeedStore } from '@/store/useFeedStore';
 import { useChanneStore } from '@/store/useChanneStore';
-import { ItemRSS, Channel } from '@/types/types'; // ⬅️ Reutilizando tipos centrais
+import { ItemRSS, Channel } from '@/types/types';
+import Toast from 'react-native-toast-message';
 
-// ----------------------------------------------------------------------
-// TIPAGEM: Reutilização do ItemRSS para inferir a forma dos parâmetros
-// ----------------------------------------------------------------------
+
 type ArticleParams = Pick<ItemRSS, 'id' | 'titulo' | 'body' | 'dataPublicacao' | 'tags' | 'img'> & {
     canalId: string; // Parâmetro adicional de lookup
 };
@@ -28,9 +26,7 @@ interface UseArticleDataReturn {
     headerRightConfig: HeaderRightConfig | null;
 }
 
-/**
- * Hook para gerenciar dados, estado e ações relacionadas a um artigo (tema, favoritos, navegação).
- */
+
 export const useArticleData = (): UseArticleDataReturn => {
     const navigation = useNavigation();
     
@@ -69,21 +65,29 @@ export const useArticleData = (): UseArticleDataReturn => {
 
         if (isMarked) {
             await feedsMarkedDel(params.id.toString());
-            Alert.alert('Removido', `Artigo ${params.id} removido dos favoritos.`);
+             Toast.show({
+                            type: 'info',
+                            text1: 'Tudo Certo',
+                            text2: `Artigo do ${canal.name} removido.`,
+                        });
         } else {
             // Reutiliza o tipo ItemRSS para criar o objeto a ser salvo
             const newMark: ItemRSS = {
                 id: params.id.toString(),
                 titulo: params.titulo.toString(),
                 body: params.body.toString(),
-                tags: params.tags!.toString(),
+                tags: params.tags?.toString() || '',
                 dataPublicacao: params.dataPublicacao!.toString(),
                 img: params.img!.toString(),
                 canal: canal, 
                 mark: true,
             };
             await feedsMarked(newMark);
-            Alert.alert('Adicionado', `Artigo ${newMark.id} adicionado aos favoritos.`);
+             Toast.show({
+                            type: 'success',
+                            text1: 'Tudo Certo 😁👍',
+                            text2: `Artigo do ${canal.name} salvo.`,
+                        });
         }
     }, [isMarked, params, canal, feedsMarked, feedsMarkedDel]);
 
